@@ -3,40 +3,30 @@ package Aug_2023.aug29;
 public class MinimumPenalty {
 
     public int bestClosingTime(String customers) {
-        int closingTime = Integer.MAX_VALUE;
-        int closingCost = Integer.MIN_VALUE;
-        int closingPenalty = Integer.MAX_VALUE;
-        for (int i = 0; i <customers.length()+1; i++) {
-            int currentCost = 0, currentPenalty=0;
-            for (int j = 0; j < i; j++) {
-                if (customers.charAt(j)=='N'){
-                    currentPenalty++;
-                }else {
-                    currentCost++;
-                }
+        int totalPenalties = 0;
+        for (int i = 0; i < customers.length(); i++) {
+            if(customers.charAt(i)=='Y')
+                totalPenalties++;
+        }
+        int currentPenalty = totalPenalties;
+        int bestClosingTime = 0;
+        for (int i = 1; i < customers.length(); i++) {
+            char ch = customers.charAt(i);
+            if(ch == 'Y'){
+                currentPenalty--;
+            }else{
+                currentPenalty++;
             }
-            for (int j = i; j < customers.length(); j++) {
-                if (customers.charAt(j)=='Y') {
-                    currentPenalty++;
-                }
-            }
-            if(i == customers.length() + 1){
-                if(customers.charAt(customers.length()) == 'Y')
-                    currentPenalty++;
-            }
-            if(currentCost>closingCost){
-                if (currentPenalty<closingPenalty){
-                    closingCost = currentCost;
-                    closingPenalty = currentPenalty;
-                    closingTime = i;
-                }
+            if(currentPenalty<totalPenalties){
+                totalPenalties = currentPenalty;
+                bestClosingTime = i+1;
             }
         }
-        return closingTime;
+        return bestClosingTime;
     }
 
     public static void main(String[] args) {
         MinimumPenalty minimumPenalty = new MinimumPenalty();
-        System.out.println(minimumPenalty.bestClosingTime("NNN"));
+        System.out.println(minimumPenalty.bestClosingTime("YN"));
     }
 }
