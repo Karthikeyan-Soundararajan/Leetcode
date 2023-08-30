@@ -11,8 +11,7 @@ public class NonDecreasingArray {
                     minReplacements += (nums[i] / preValue)-1;
                 }else{
                    minReplacements += (nums[i] / preValue);
-//                   preValue = calculateCurrentValue(preValue,preValue + nums[i]%preValue);
-                    preValue = (nums[i] / preValue);
+                   preValue = calculateCurrentValue(preValue,preValue + nums[i]%preValue);
                 }
             }else {
                 preValue = nums[i];
