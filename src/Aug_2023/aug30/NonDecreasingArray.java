@@ -16,7 +16,6 @@ public class NonDecreasingArray {
             }else {
                 preValue = nums[i];
             }
-            System.out.println(minReplacements+" "+preValue);
         }
         return minReplacements;
     }
