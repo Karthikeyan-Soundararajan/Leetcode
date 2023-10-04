@@ -1,30 +1,29 @@
 package Oct_2023.Oct_2;
 
+import java.util.stream.IntStream;
+
 public class Remove_Colored_Pieces {
 
     public boolean winnerOfGame(String colors) {
-        int countOfAlice = 0;
-        int countOfBob = 0;
+        final int[] countOfAlice = {0};
+        final int[] countOfBob = {0};
         if(colors.length()==0)
             return false;
-        char c = 0;
-        for (int i = 0; i < colors.length()-1; i++) {
-            if (c == colors.charAt(i)) {
-                if (colors.charAt(i + 1) == c) {
+        final char[] c = {0};
+        IntStream.range(0,colors.length()-1).forEach(i -> {
+            if (c[0] == colors.charAt(i)) {
+                if (colors.charAt(i + 1) == c[0]) {
                     if (colors.charAt(i) == 'A') {
-                        countOfAlice++;
+                        countOfAlice[0]++;
                     } else {
-                        countOfBob++;
+                        countOfBob[0]++;
                     }
                 }
             }else {
-                c = colors.charAt(i);
+                c[0] = colors.charAt(i);
             }
-        }
-        if(countOfAlice-countOfBob>0){
-            return true;
-        }
-        return false;
+        });
+        return countOfAlice[0] - countOfBob[0] > 0;
     }
 
     public static void main(String[] args) {
