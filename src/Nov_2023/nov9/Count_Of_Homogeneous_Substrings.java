@@ -3,7 +3,7 @@ package Nov_2023.nov9;
 public class Count_Of_Homogeneous_Substrings {
 
     public int countHomogenous(String s) {
-        int result = 0;
+        long result = 0;
         int start = 0;
         for (int i = 0; i < s.length(); i++) {
             if(s.charAt(i)!=s.charAt(start)){
@@ -12,13 +12,12 @@ public class Count_Of_Homogeneous_Substrings {
             }
         }
         result = updateResult(s.length(),start,result);
-        return result;
+        return (int) (result % 100000007);
     }
 
-    public int updateResult(int start, int end, int result){
-        int curLen = start - end;
+    public long updateResult(int end, int start, long result){
+        int curLen = end - start;
         result += (curLen * (curLen+1) / 2);
-        result %= 100000007;
         return result;
     }
 
